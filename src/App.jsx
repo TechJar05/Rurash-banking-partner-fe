@@ -11,9 +11,10 @@ import ProfilePage from './pages/ProfilePage';
 
 
 // Components
-import Sidebar from './component/sidebar';
+
 import RegistrationPage from './component/RegistrationPage';
 import LoginPage from './component/Loginpage';
+import Sidebar from './pages/Sidebar';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('login');

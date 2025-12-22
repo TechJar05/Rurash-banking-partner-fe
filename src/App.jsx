@@ -6,14 +6,14 @@ import Dashboard from './pages/Dashboard';
 import MyClientsPage from './pages/MyClientsPage';
 import ClientDetailPage from './pages/ClientDetailPage';
 import NewReferralPage from './pages/NewReferralPage';
-import LoginPage from './Pages/LoginPage';
-import RegistrationPage from './Pages/RegistrationPage';
 import ChatPage from './pages/ChatPage';
 import ProfilePage from './pages/ProfilePage';
 
 
 // Components
 import Sidebar from './component/sidebar';
+import RegistrationPage from './component/RegistrationPage';
+import LoginPage from './component/Loginpage';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('login');

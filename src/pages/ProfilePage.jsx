@@ -62,7 +62,7 @@ const ProfilePage = () => {
         {/* Performance Card */}
         <div className="bg-white rounded-xl border p-6 flex flex-col items-center justify-center">
           <div className="relative w-36 h-36 mb-4">
-            <div className="absolute inset-0 rounded-full border-[12px] border-blue-500"></div>
+            <div className="absolute inset-0 rounded-full border-12 border-blue-500"></div>
             <div className="absolute inset-0 flex flex-col items-center justify-center">
               <span className="text-3xl font-bold">85%</span>
               <span className="text-sm text-emerald-600 font-medium">

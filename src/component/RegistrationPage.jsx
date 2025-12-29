@@ -36,7 +36,7 @@ const RegistrationPage = ({ onNavigateToLogin }) => {
   return (
     <div className="flex min-h-screen flex-col lg:flex-row">
       {/* Left Panel */}
-      <div className="w-full lg:w-1/2 bg-gradient-to-br from-[#1e3a5f] via-[#2c5282] to-[#1a365d] relative overflow-hidden flex">
+      <div className="w-full lg:w-1/2 bg-linear-to-br from-[#1e3a5f] via-[#2c5282] to-[#1a365d] relative overflow-hidden flex">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-20 left-10 w-96 h-96 bg-blue-400 rounded-full blur-3xl"></div>
@@ -44,7 +44,7 @@ const RegistrationPage = ({ onNavigateToLogin }) => {
         </div>
 
         {/* Content */}
-        <div className="relative z-10 flex flex-col justify-between p-6 sm:p-8 lg:p-12 text-white w-full min-h-[300px] lg:min-h-screen">
+        <div className="relative z-10 flex flex-col justify-between p-6 sm:p-8 lg:p-12 text-white w-full min-h-75 lg:min-h-screen">
           {/* Logo */}
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-[#60a5fa] rounded-lg flex items-center justify-center">

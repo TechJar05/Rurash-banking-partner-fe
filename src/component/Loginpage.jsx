@@ -52,7 +52,7 @@ const LoginPage = ({ onNavigateToRegister, onLogin }) => {
   return (
     <div className="flex min-h-screen flex-col lg:flex-row">
       {/* Left Panel */}
-      <div className="w-full lg:w-1/2 bg-gradient-to-br from-[#1e3a5f] via-[#2c5282] to-[#1a365d] relative overflow-hidden flex">
+      <div className="w-full lg:w-1/2 bg-linear-to-br from-[#1e3a5f] via-[#2c5282] to-[#1a365d] relative overflow-hidden flex">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-20 left-10 w-96 h-96 bg-blue-400 rounded-full blur-3xl"></div>
@@ -60,7 +60,7 @@ const LoginPage = ({ onNavigateToRegister, onLogin }) => {
         </div>
 
         {/* Content */}
-        <div className="relative z-10 flex flex-col justify-between p-6 sm:p-8 lg:p-12 text-white w-full min-h-[300px] lg:min-h-screen">
+        <div className="relative z-10 flex flex-col justify-between p-6 sm:p-8 lg:p-12 text-white w-full min-h-75 lg:min-h-screen">
           {/* Logo */}
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-[#60a5fa] rounded-lg flex items-center justify-center">
@@ -138,7 +138,7 @@ const LoginPage = ({ onNavigateToRegister, onLogin }) => {
           {/* Error Alert */}
           {error && (
             <div className="mb-5 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
-              <div className="flex-shrink-0">
+              <div className="shrink-0">
                 <svg className="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
                 </svg>

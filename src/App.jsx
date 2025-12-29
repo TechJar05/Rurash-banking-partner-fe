@@ -98,10 +98,10 @@ function App() {
  
             <h1 className="text-lg font-bold text-gray-900 hidden sm:block">
               {activePage === 'dashboard' && 'Dashboard'}
-              {activePage === 'clients' && 'My Clients'}
+              {activePage === 'clients' && 'My Referrals'}
               {activePage === 'newReferral' && 'New Referral'}
-              {activePage === 'clientDetail' && 'Client Detail'}
-              {activePage === 'chat' && 'Chat'}
+              {activePage === 'clientDetail' && 'Referral Details'}
+              {activePage === 'chat' && 'Chat with RM'}
               {activePage === 'profile' && 'Profile'}
             </h1>
  
@@ -110,10 +110,10 @@ function App() {
                 <Search className="absolute left-2.5 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
                 <input
                   type="text"
-                  placeholder="Search Client or Case ID..."
+                  placeholder="Search referrals..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-9 pr-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full pl-9 pr-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
                 />
               </div>
             </div>
@@ -125,7 +125,7 @@ function App() {
               </button>
 
               <div className="hidden sm:flex items-center gap-2 pl-3 border-l border-gray-200">
-                <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center text-white font-semibold text-xs">
+                <div className="w-8 h-8 bg-linear-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center text-white font-semibold text-xs">
                   AM
                 </div>
               </div>

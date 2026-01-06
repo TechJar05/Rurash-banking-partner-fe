@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Plus, Eye, ChevronDown, Filter, Info } from 'lucide-react';
+import React, { useState, useMemo } from 'react';
+import { Plus, Eye, ChevronDown, Filter, Info, Search } from 'lucide-react';
 import { BANK_USER_PHASES } from '../constants/workflow';
 
 /**
@@ -16,7 +16,7 @@ import { BANK_USER_PHASES } from '../constants/workflow';
  * - Track progress
  * - Navigate to details or chat
  */
-const MyClientsPage = ({ onNavigate }) => {
+const MyClientsPage = ({ onNavigate, searchQuery = '' }) => {
   const [filters, setFilters] = useState({
     phase: 'All',
     date: 'All Time'
@@ -28,7 +28,7 @@ const MyClientsPage = ({ onNavigate }) => {
       'Initiated': 'bg-blue-100 text-blue-700',
       'Valuation': 'bg-purple-100 text-purple-700',
       'Payment': 'bg-orange-100 text-orange-700',
-      'Execution': 'bg-teal-100 text-teal-700',
+      'Execution': 'bg-blue-100 text-blue-500',
       'Completed': 'bg-green-100 text-green-700'
     };
     return phaseColors[phase] || 'bg-gray-100 text-gray-700';
@@ -105,11 +105,28 @@ const MyClientsPage = ({ onNavigate }) => {
     }
   ];
 
-  // Filter referrals based on selected filters
-  const filteredReferrals = referrals.filter(referral => {
-    if (filters.phase !== 'All' && referral.phase !== filters.phase) return false;
-    return true;
-  });
+  // Filter referrals based on selected filters and search query
+  const filteredReferrals = useMemo(() => {
+    return referrals.filter(referral => {
+      // Phase filter
+      if (filters.phase !== 'All' && referral.phase !== filters.phase) return false;
+
+      // Search filter - search across name, caseId, caseType, rmName
+      if (searchQuery.trim()) {
+        const query = searchQuery.toLowerCase();
+        const searchableFields = [
+          referral.name,
+          referral.caseId,
+          referral.caseType,
+          referral.rmName
+        ].map(field => field.toLowerCase());
+
+        return searchableFields.some(field => field.includes(query));
+      }
+
+      return true;
+    });
+  }, [referrals, filters.phase, searchQuery]);
 
   return (
     <main className="flex-1 p-4 sm:p-6 overflow-y-auto">
@@ -122,7 +139,7 @@ const MyClientsPage = ({ onNavigate }) => {
           </div>
           <button
             onClick={() => onNavigate('newReferral')}
-            className="flex items-center gap-2 px-4 py-2 text-sm text-white bg-teal-500 rounded-lg hover:bg-teal-600 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 text-sm text-white bg-blue-400 rounded-lg hover:bg-blue-500 transition-colors"
           >
             <Plus className="w-4 h-4" />
             <span className="hidden sm:inline">New Referral</span>
@@ -151,7 +168,7 @@ const MyClientsPage = ({ onNavigate }) => {
           <select
             value={filters.phase}
             onChange={(e) => setFilters({ ...filters, phase: e.target.value })}
-            className="appearance-none pl-3 pr-8 py-2 text-sm border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-teal-500 cursor-pointer"
+            className="appearance-none pl-3 pr-8 py-2 text-sm border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-blue-400 cursor-pointer"
           >
             <option value="All">All Phases</option>
             <option value={BANK_USER_PHASES.INITIATED.name}>{BANK_USER_PHASES.INITIATED.name}</option>
@@ -168,7 +185,7 @@ const MyClientsPage = ({ onNavigate }) => {
           <select
             value={filters.date}
             onChange={(e) => setFilters({ ...filters, date: e.target.value })}
-            className="appearance-none pl-3 pr-8 py-2 text-sm border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-teal-500 cursor-pointer"
+            className="appearance-none pl-3 pr-8 py-2 text-sm border border-gray-300 rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-blue-400 cursor-pointer"
           >
             <option>All Time</option>
             <option>Last 7 Days</option>
@@ -181,7 +198,7 @@ const MyClientsPage = ({ onNavigate }) => {
         {(filters.phase !== 'All' || filters.date !== 'All Time') && (
           <button
             onClick={() => setFilters({ phase: 'All', date: 'All Time' })}
-            className="ml-auto text-sm text-teal-600 hover:text-teal-700 font-medium"
+            className="ml-auto text-sm text-blue-500 hover:text-blue-600 font-medium"
           >
             Clear filters
           </button>
@@ -250,7 +267,7 @@ const MyClientsPage = ({ onNavigate }) => {
                     <div className="flex items-center gap-2">
                       <div className="flex-1 max-w-24 bg-gray-200 rounded-full h-2">
                         <div
-                          className="bg-teal-500 h-2 rounded-full transition-all"
+                          className="bg-blue-400 h-2 rounded-full transition-all"
                           style={{ width: `${getProgressFromPhase(referral.phase)}%` }}
                         ></div>
                       </div>
@@ -307,7 +324,7 @@ const MyClientsPage = ({ onNavigate }) => {
               <div className="flex items-center gap-3">
                 <div className="flex-1 bg-gray-200 rounded-full h-2">
                   <div
-                    className="bg-teal-500 h-2 rounded-full"
+                    className="bg-blue-400 h-2 rounded-full"
                     style={{ width: `${getProgressFromPhase(referral.phase)}%` }}
                   ></div>
                 </div>
@@ -326,8 +343,21 @@ const MyClientsPage = ({ onNavigate }) => {
         {/* Empty State */}
         {filteredReferrals.length === 0 && (
           <div className="p-8 text-center">
-            <div className="text-gray-500 mb-2">No referrals found</div>
-            <p className="text-sm text-gray-400">Try adjusting your filters or add a new referral</p>
+            <div className="w-12 h-12 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
+              <Search className="w-6 h-6 text-gray-400" />
+            </div>
+            <div className="text-gray-500 mb-2 font-medium">No referrals found</div>
+            <p className="text-sm text-gray-400 mb-4">
+              {searchQuery ? `No results for "${searchQuery}"` : 'Try adjusting your filters or add a new referral'}
+            </p>
+            {(searchQuery || filters.phase !== 'All') && (
+              <button
+                onClick={() => setFilters({ phase: 'All', date: 'All Time' })}
+                className="text-sm text-blue-500 hover:text-blue-600 font-medium"
+              >
+                Clear all filters
+              </button>
+            )}
           </div>
         )}
 

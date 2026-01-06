@@ -49,7 +49,7 @@ const Sidebar = ({
       <div className="p-4 border-b border-gray-200">
         <div className="flex flex-col gap-1">
           <div className="flex items-center gap-2">
-            <div className="w-7 h-7 bg-teal-500 rounded-md flex items-center justify-center shrink-0">
+            <div className="w-7 h-7 bg-blue-400 rounded-md flex items-center justify-center shrink-0">
               <Handshake className="w-4 h-4 text-white" />
             </div>
             <div>
@@ -72,7 +72,7 @@ const Sidebar = ({
               onClick={() => onNavigate('dashboard')}
               className={`w-full flex items-center gap-2.5 px-3 py-2.5 text-sm rounded-md font-medium transition-colors ${
                 activePage === 'dashboard'
-                  ? 'text-teal-600 bg-teal-50'
+                  ? 'text-blue-500 bg-blue-50'
                   : 'text-gray-600 hover:bg-gray-50'
               }`}
             >
@@ -87,7 +87,7 @@ const Sidebar = ({
                 activePage === 'clients' ||
                 activePage === 'clientDetail' ||
                 activePage === 'newReferral'
-                  ? 'text-teal-600 bg-teal-50'
+                  ? 'text-blue-500 bg-blue-50'
                   : 'text-gray-600 hover:bg-gray-50'
               }`}
             >
@@ -100,7 +100,7 @@ const Sidebar = ({
               onClick={() => onNavigate('chat')}
               className={`w-full flex items-center gap-2.5 px-3 py-2.5 text-sm rounded-md font-medium transition-colors ${
                 activePage === 'chat'
-                  ? 'text-teal-600 bg-teal-50'
+                  ? 'text-blue-500 bg-blue-50'
                   : 'text-gray-600 hover:bg-gray-50'
               }`}
             >
@@ -113,7 +113,7 @@ const Sidebar = ({
               onClick={() => onNavigate('profile')}
               className={`w-full flex items-center gap-2.5 px-3 py-2.5 text-sm rounded-md font-medium transition-colors ${
                 activePage === 'profile'
-                  ? 'text-teal-600 bg-teal-50'
+                  ? 'text-blue-500 bg-blue-50'
                   : 'text-gray-600 hover:bg-gray-50'
               }`}
             >

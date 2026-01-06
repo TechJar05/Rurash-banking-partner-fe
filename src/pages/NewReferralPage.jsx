@@ -108,7 +108,7 @@ const NewReferralPage = ({ onNavigate }) => {
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <button
                 onClick={() => onNavigate('clients')}
-                className="px-6 py-2.5 text-sm font-semibold text-white bg-teal-500 rounded-lg hover:bg-teal-600 transition-colors"
+                className="px-6 py-2.5 text-sm font-semibold text-white bg-blue-400 rounded-lg hover:bg-blue-500 transition-colors"
               >
                 View My Referrals
               </button>
@@ -200,7 +200,7 @@ const NewReferralPage = ({ onNavigate }) => {
                 value={formData.clientName}
                 onChange={handleInputChange}
                 placeholder="Enter full name or company name"
-                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
                 required
               />
             </div>
@@ -219,7 +219,7 @@ const NewReferralPage = ({ onNavigate }) => {
                   value={formData.phoneNumber}
                   onChange={handleInputChange}
                   placeholder="+91 00000 00000"
-                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
                   required
                 />
               </div>
@@ -236,7 +236,7 @@ const NewReferralPage = ({ onNavigate }) => {
                   value={formData.email}
                   onChange={handleInputChange}
                   placeholder="client@example.com"
-                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
                   required
                 />
               </div>
@@ -252,7 +252,7 @@ const NewReferralPage = ({ onNavigate }) => {
                 name="referralType"
                 value={formData.referralType}
                 onChange={handleInputChange}
-                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent appearance-none bg-white"
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent appearance-none bg-white"
                 required
               >
                 <option value="">Select service type</option>
@@ -276,7 +276,7 @@ const NewReferralPage = ({ onNavigate }) => {
                 onChange={handleInputChange}
                 placeholder="Any relevant information about the client's requirements or background..."
                 rows="4"
-                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent resize-none"
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent resize-none"
               ></textarea>
               <p className="mt-1 text-xs text-gray-500">
                 This information will help the assigned RM better understand the client's needs.
@@ -309,7 +309,7 @@ const NewReferralPage = ({ onNavigate }) => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="flex items-center gap-2 px-6 py-2.5 text-sm font-semibold text-white bg-teal-500 rounded-lg hover:bg-teal-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex items-center gap-2 px-6 py-2.5 text-sm font-semibold text-white bg-blue-400 rounded-lg hover:bg-blue-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isSubmitting ? (
                 <>

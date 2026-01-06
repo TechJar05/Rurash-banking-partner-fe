@@ -109,15 +109,15 @@ const Dashboard = ({ onNavigate }) => {
       </div>
 
       {/* Quick Actions Banner */}
-      <div className="mb-6 p-4 bg-gradient-to-r from-teal-500 to-teal-600 rounded-lg text-white">
+      <div className="mb-6 p-4 bg-gradient-to-r from-blue-400 to-blue-500 rounded-lg text-white">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           <div>
             <h2 className="font-semibold text-lg mb-1">Refer a New Client</h2>
-            <p className="text-sm text-teal-100">Submit a new referral and we'll handle the rest</p>
+            <p className="text-sm text-blue-100">Submit a new referral and we'll handle the rest</p>
           </div>
           <button
             onClick={() => onNavigate('newReferral')}
-            className="flex items-center gap-2 px-4 py-2 bg-white text-teal-600 rounded-lg font-semibold hover:bg-teal-50 transition-colors"
+            className="flex items-center gap-2 px-4 py-2 bg-white text-blue-500 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
           >
             <Users className="w-4 h-4" />
             New Referral
@@ -201,7 +201,7 @@ const Dashboard = ({ onNavigate }) => {
                 })}
               >
                 <div className="col-span-4 flex items-center gap-2.5">
-                  <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-white font-semibold text-xs shrink-0">
+                  <div className="w-8 h-8 bg-gradient-to-br from-blue-300 to-blue-500 rounded-full flex items-center justify-center text-white font-semibold text-xs shrink-0">
                     {referral.avatar}
                   </div>
                   <div className="min-w-0">
@@ -239,7 +239,7 @@ const Dashboard = ({ onNavigate }) => {
               })}
             >
               <div className="flex items-start gap-3 mb-3">
-                <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-white font-semibold text-sm shrink-0">
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-300 to-blue-500 rounded-full flex items-center justify-center text-white font-semibold text-sm shrink-0">
                   {referral.avatar}
                 </div>
                 <div className="flex-1 min-w-0">
@@ -263,7 +263,7 @@ const Dashboard = ({ onNavigate }) => {
       {/* Help Section */}
       <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
         <div className="flex items-start gap-3">
-          <MessageCircle className="w-5 h-5 text-teal-600 shrink-0 mt-0.5" />
+          <MessageCircle className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" />
           <div>
             <h3 className="font-semibold text-gray-900 text-sm mb-1">Need assistance?</h3>
             <p className="text-xs text-gray-600 mb-2">
@@ -271,7 +271,7 @@ const Dashboard = ({ onNavigate }) => {
             </p>
             <button
               onClick={() => onNavigate('chat')}
-              className="text-sm font-semibold text-teal-600 hover:text-teal-700"
+              className="text-sm font-semibold text-blue-500 hover:text-blue-600"
             >
               Open Chat
             </button>

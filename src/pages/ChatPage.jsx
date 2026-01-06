@@ -2,25 +2,11 @@ import React, { useState } from 'react';
 import { Send, Info, Clock, CheckCircle2 } from 'lucide-react';
 import { BANK_USER_PHASES } from '../constants/workflow';
 
-/**
- * ChatPage - RM Communication Interface for Bank Users
- *
- * This page allows Bank Users to communicate with their assigned RM.
- *
- * Bank Users can:
- * - Send and receive messages
- * - Ask questions about referral status
- * - Get updates from their RM
- *
- * Bank Users CANNOT:
- * - Upload documents (removed attachment button)
- * - View financial details
- * - Access internal case information
- */
+ 
 const ChatPage = ({ onNavigate }) => {
   const [messageInput, setMessageInput] = useState('');
 
-  // Mock active referrals for chat
+ 
   const activeReferrals = [
     {
       id: 1,
@@ -42,7 +28,7 @@ const ChatPage = ({ onNavigate }) => {
 
   const selectedReferral = activeReferrals.find(r => r.isSelected) || activeReferrals[0];
 
-  // Mock messages
+ 
   const messages = [
     {
       id: 1,
@@ -78,7 +64,7 @@ const ChatPage = ({ onNavigate }) => {
     }
   };
 
-  const handleKeyPress = (e) => {
+  const handleKeyDown = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSendMessage();
@@ -102,12 +88,12 @@ const ChatPage = ({ onNavigate }) => {
                 key={referral.id}
                 className={`p-3 rounded-lg cursor-pointer transition-colors ${
                   referral.isSelected
-                    ? 'bg-teal-50 border border-teal-200'
+                    ? 'bg-blue-50 border border-blue-200'
                     : 'hover:bg-gray-50 border border-transparent'
                 }`}
               >
                 <div className={`text-xs font-semibold mb-1 ${
-                  referral.isSelected ? 'text-teal-600' : 'text-gray-400'
+                  referral.isSelected ? 'text-blue-500' : 'text-gray-400'
                 }`}>
                   {referral.caseId}
                 </div>
@@ -133,7 +119,7 @@ const ChatPage = ({ onNavigate }) => {
           {/* Chat Header */}
           <div className="flex items-center justify-between p-4 bg-white border-b">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-teal-400 to-teal-600 rounded-full flex items-center justify-center">
+              <div className="w-10 h-10 bg-gradient-to-br from-blue-300 to-blue-500 rounded-full flex items-center justify-center">
                 <span className="text-white font-semibold text-sm">EC</span>
               </div>
               <div>
@@ -156,12 +142,12 @@ const ChatPage = ({ onNavigate }) => {
               >
                 <div className={`max-w-md p-3 rounded-lg text-sm ${
                   message.from === 'user'
-                    ? 'bg-teal-500 text-white'
+                    ? 'bg-blue-400 text-white'
                     : 'bg-white shadow-sm border border-gray-100'
                 }`}>
                   {message.text}
                   <div className={`text-xs mt-1 ${
-                    message.from === 'user' ? 'text-teal-100' : 'text-gray-400'
+                    message.from === 'user' ? 'text-blue-100' : 'text-gray-400'
                   }`}>
                     {message.time}
                   </div>
@@ -178,13 +164,13 @@ const ChatPage = ({ onNavigate }) => {
                 placeholder="Type a message to your RM..."
                 value={messageInput}
                 onChange={(e) => setMessageInput(e.target.value)}
-                onKeyPress={handleKeyPress}
-                className="flex-1 border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                onKeyDown={handleKeyDown}
+                className="flex-1 border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
               />
               <button
                 onClick={handleSendMessage}
                 disabled={!messageInput.trim()}
-                className="p-2.5 bg-teal-500 rounded-lg text-white hover:bg-teal-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="p-2.5 bg-blue-400 rounded-lg text-white hover:bg-blue-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Send className="w-4 h-4" />
               </button>
@@ -205,7 +191,7 @@ const ChatPage = ({ onNavigate }) => {
           <div className="flex-1 p-4 overflow-y-auto">
             {/* Progress Circle */}
             <div className="flex justify-center mb-6">
-              <div className="w-28 h-28 rounded-full border-8 border-teal-500 flex items-center justify-center">
+              <div className="w-28 h-28 rounded-full border-8 border-blue-400 flex items-center justify-center">
                 <div className="text-center">
                   <div className="text-2xl font-bold text-gray-900">40%</div>
                   <div className="text-xs text-gray-500">Complete</div>
@@ -240,7 +226,7 @@ const ChatPage = ({ onNavigate }) => {
                     <div key={phase.id} className="flex items-center gap-3">
                       <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
                         isCompleted ? 'bg-green-500' :
-                        isCurrent ? 'bg-teal-500' :
+                        isCurrent ? 'bg-blue-400' :
                         'bg-gray-200'
                       }`}>
                         {isCompleted ? (

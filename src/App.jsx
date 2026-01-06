@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { Search, Bell, Menu } from 'lucide-react';
 
 // Pages
@@ -9,12 +9,20 @@ import NewReferralPage from './pages/NewReferralPage';
 import ChatPage from './pages/ChatPage';
 import ProfilePage from './pages/ProfilePage';
 
-
 // Components
-
 import RegistrationPage from './component/RegistrationPage';
 import LoginPage from './component/Loginpage';
 import Sidebar from './pages/Sidebar';
+
+// Page title configuration
+const PAGE_TITLES = {
+  dashboard: 'Dashboard',
+  clients: 'My Referrals',
+  newReferral: 'New Referral',
+  clientDetail: 'Referral Details',
+  chat: 'Chat with RM',
+  profile: 'Profile'
+};
 
 function App() {
   const [currentPage, setCurrentPage] = useState('login');
@@ -23,6 +31,17 @@ function App() {
   const [selectedClient, setSelectedClient] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [notifications] = useState([
+    { id: 1, message: 'New referral update', unread: true },
+    { id: 2, message: 'RM responded to your message', unread: true },
+    { id: 3, message: 'Case #RS-2024-001 moved to Payment', unread: false }
+  ]);
+
+  // Memoized unread count
+  const unreadCount = useMemo(() =>
+    notifications.filter(n => n.unread).length,
+    [notifications]
+  );
 
   const handleLogin = () => {
     setIsAuthenticated(true);
@@ -36,13 +55,18 @@ function App() {
     setSelectedClient(null);
   };
 
-  const handleNavigate = (page, clientData) => {
+  const handleNavigate = useCallback((page, clientData) => {
     setActivePage(page);
     if (clientData) {
       setSelectedClient(clientData);
     }
     setIsSidebarOpen(false);
-  };
+  }, []);
+
+  // Handle search - can be passed to child components
+  const handleSearch = useCallback((query) => {
+    setSearchQuery(query);
+  }, []);
 
   /* ---------------------------
      AUTH PAGES (LOGIN / REGISTER)
@@ -97,12 +121,7 @@ function App() {
             </button>
  
             <h1 className="text-lg font-bold text-gray-900 hidden sm:block">
-              {activePage === 'dashboard' && 'Dashboard'}
-              {activePage === 'clients' && 'My Referrals'}
-              {activePage === 'newReferral' && 'New Referral'}
-              {activePage === 'clientDetail' && 'Referral Details'}
-              {activePage === 'chat' && 'Chat with RM'}
-              {activePage === 'profile' && 'Profile'}
+              {PAGE_TITLES[activePage] || 'Dashboard'}
             </h1>
  
             <div className="flex-1 max-w-md">
@@ -113,19 +132,34 @@ function App() {
                   placeholder="Search referrals..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-9 pr-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  className="w-full pl-9 pr-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
                 />
               </div>
             </div>
 
           
             <div className="flex items-center gap-2">
-              <button className="p-2 text-gray-600 hover:bg-gray-100 rounded-lg">
+              <button
+                className="relative p-2 text-gray-600 hover:bg-gray-100 rounded-lg"
+                aria-label={`Notifications${unreadCount > 0 ? `, ${unreadCount} unread` : ''}`}
+              >
                 <Bell className="w-4 h-4" />
+                {unreadCount > 0 && (
+                  <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center">
+                    {unreadCount}
+                  </span>
+                )}
               </button>
 
               <div className="hidden sm:flex items-center gap-2 pl-3 border-l border-gray-200">
-                <div className="w-8 h-8 bg-linear-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center text-white font-semibold text-xs">
+                <div
+                  className="w-8 h-8 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center text-white font-semibold text-xs cursor-pointer hover:ring-2 hover:ring-orange-300"
+                  onClick={() => handleNavigate('profile')}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => e.key === 'Enter' && handleNavigate('profile')}
+                  aria-label="Go to profile"
+                >
                   AM
                 </div>
               </div>
@@ -139,7 +173,7 @@ function App() {
         )}
 
         {activePage === 'clients' && (
-          <MyClientsPage onNavigate={handleNavigate} />
+          <MyClientsPage onNavigate={handleNavigate} searchQuery={searchQuery} />
         )}
 
         {activePage === 'newReferral' && (

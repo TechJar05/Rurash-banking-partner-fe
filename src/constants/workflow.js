@@ -48,7 +48,7 @@ export const BANK_USER_PHASES = {
     key: 'execution',
     name: 'Execution',
     description: 'Documentation and verification in progress',
-    color: 'teal'
+    color: 'blue'
   },
   COMPLETED: {
     id: 5,
